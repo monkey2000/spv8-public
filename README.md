@@ -6,7 +6,7 @@ This is the artifact for our paper @ DAC '21: `SpV8: Pursuing Optimal Vectorizat
 
 # Usage
 
-## Dependencies & Recommend Environment:
+## Dependencies & Recommend Environment
 
 1. Intel Processor with AVX-512 support
 2. GCC 9
@@ -22,13 +22,43 @@ make
 
 ## Run kernel
 
-...
+Both the binaries have the same parameter list as follows:
+
+```
+bin/spmv_(kernel) [loop_count] [use_optimize?] [thread_count]
+```
+
+1. `loop_count`: Number of iterations of SpMV
+2. `use_optimize?`: Taking effects only on MKL binary. It is used to activate MKL's Inspector-Executor Optimization.
+3. `thread_count`: Number of OpenMP threads
+
+Example for running SpV8:
+
+```
+bin/spmv_spv8 1000 1 8
+```
+
+## How to feed matrix
+
+In SpV8 experiments, we used a custom but straightforward data format to store CSR matrix. And once we execute the binary, it will search for the following data files **under the work directory**:
+
+```
+info.txt : Contains number of NNZ, rows, cols
+rowb.txt : 0-based NNZ index for each row begin
+rowe.txt : 0-based NNZ index for each row end
+nnz.txt  : NNZ list
+col.txt  : 0-based column index for each row
+x.txt    : A random vector x, used for SpMV
+ans.txt  : Used to check answer
+```
+
+Meanwhile, **we also provide two script** in `contrib` for you to generate data files from Matlab Matrix Format or Matrix Market Format.
 
 # Notes
 
-This repo only contains two kernel for SpV8 and MKL. For other methods like CVR, ESB and CSR5, we reused kernels provided in [puckbee/pava](https://github.com/puckbee/pava). These kernel are collected from the original author. And we only modified their output code to simplify data collection.
+This repo only contains two kernel for SpV8 and MKL. For other methods like CVR, ESB and CSR5, we reused kernels provided in [puckbee/CVR](https://github.com/puckbee/CVR) and [puckbee/pava](https://github.com/puckbee/pava). These kernel are collected from the original author. And we only modified their output code to simplify data collection.
 
-We thank Biwei Xie, the author of CVR, for his informative discussion on running previous methods.
+We thank Biwei Xie, the author of CVR, for his kind and informative discussion on running previous methods.
 
 # License
 
