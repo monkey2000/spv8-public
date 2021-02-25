@@ -8,11 +8,11 @@ This is the artifact for our paper @ DAC '21: `SpV8: Pursuing Optimal Vectorizat
 
 ## Dependencies & Recommend Environment
 
-1. Intel Processor with AVX-512 support
+1. Intel Xeon Processor with AVX-512 support
 2. GCC 9
 3. Intel Parallel Studio XE 2020.2
-4. numactl (to set affinity)
-5. powercpu (to set frequency)
+4. numactl (to set numa affinity)
+5. cpupower (to set frequency, other available tools should also work)
 
 ## Compilation
 
@@ -22,9 +22,11 @@ make
 
 ## Run kernel
 
-Both the binaries have the same parameter list as follows:
+Before running, CPU frequency should be fixed to eliminate CPU Turbo effects.
 
-```
+The binaries have the same parameter list as follows:
+
+```bash
 bin/spmv_(kernel) [loop_count] [use_optimize?] [thread_count]
 ```
 
@@ -34,13 +36,13 @@ bin/spmv_(kernel) [loop_count] [use_optimize?] [thread_count]
 
 Example for running SpV8:
 
-```
-bin/spmv_spv8 1000 1 8
+```bash
+numactl --cpunodebind=1 --membind=1 bin/spmv_spv8 1000 1 8
 ```
 
-## How to feed matrix
+## How to feed matrix to kernel
 
-In SpV8 experiments, we used a custom but straightforward data format to store CSR matrix. And once we execute the binary, it will search for the following data files **under the work directory**:
+In our experiments, we used a custom but straightforward data format to store CSR matrix. And once we execute the binary, it will search for the following data files **under the work directory**:
 
 ```
 info.txt : Contains number of NNZ, rows, cols
@@ -65,4 +67,3 @@ We thank Biwei Xie, the author of CVR, for his kind and informative discussion o
 The code is licensed with MIT Opensource License.
 
 But note that, the dataset, Intel MKL and other previous research kernels are copyright by other entities.
-
