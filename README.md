@@ -56,7 +56,7 @@ Meanwhile, **we also provide two script** in `contrib` for you to generate data 
 
 # Notes
 
-This repo only contains two kernel for SpV8 and MKL. For other methods like CVR, ESB and CSR5, we reused kernels provided in [puckbee/CVR](https://github.com/puckbee/CVR) and [puckbee/pava](https://github.com/puckbee/pava). These kernel are collected from the original author. And we only modified their output code to simplify data collection.
+This repo only contains two kernel for SpV8 and MKL. For other methods like CVR, ESB and CSR5, we reused kernels provided in [puckbee/CVR](https://github.com/puckbee/CVR) and [puckbee/pava](https://github.com/puckbee/pava). These kernels are collected from the original authors. And we only modified their output code to simplify data collection.
 
 We thank Biwei Xie, the author of CVR, for his kind and informative discussion on running previous methods.
 
