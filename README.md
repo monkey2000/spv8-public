@@ -47,7 +47,7 @@ info.txt : Contains number of NNZ, rows, cols
 rowb.txt : 0-based NNZ index for each row begin
 rowe.txt : 0-based NNZ index for each row end
 nnz.txt  : NNZ list
-col.txt  : 0-based column index for each row
+col.txt  : 0-based column index for each NNZ
 x.txt    : A random vector x, used for SpMV
 ans.txt  : Used to check answer
 ```
