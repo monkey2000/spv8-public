@@ -56,6 +56,10 @@ ans.txt  : Used to check answer
 
 Meanwhile, **we also provide two script** in `contrib` for you to generate data files from Matlab Matrix Format or Matrix Market Format.
 
+## Dataset
+
+All the matrices we used in our benchmark are listed in `contrib/data.txt`, and their files are publicly available on [SuiteSparse Matrix Collection](https://sparse.tamu.edu/).
+
 # Notes
 
 This repo only contains two kernel for SpV8 and MKL. For other methods like CVR, ESB and CSR5, we reused kernels provided in [puckbee/CVR](https://github.com/puckbee/CVR) and [puckbee/pava](https://github.com/puckbee/pava). These kernels are collected from the original authors. And we only modified their output code to simplify data collection.
