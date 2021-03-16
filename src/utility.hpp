@@ -78,8 +78,10 @@ void destroy_matrix(csr_matrix &mat) {
 bool check_answer(csr_matrix &mat) {
   int bad_count = 0;
   for (int i = 0; i < mat.rows; i++) {
-    if (abs(mat.y[i] - mat.ans[i]) > 0.1) {
-      if (bad_count < 10)
+    double yi = mat.y[i];
+    double ansi = mat.ans[i];
+    if (abs(yi - ansi) > 0.01 * abs(ansi) && !(abs(yi) <= 1e-5 && abs(ansi) <= 1e-5)) {  
+    	if (bad_count < 10)
         fprintf(stderr, "y[%d] expected %lf got %lf\n", i, mat.ans[i], mat.y[i]);
       bad_count++;
     }
@@ -135,7 +137,7 @@ csr_matrix apply_order(csr_matrix &mat, vector<vector<int>> &tasks, int copy_oob
       }
     }
   }
-  
+
   return ret;
 }
 

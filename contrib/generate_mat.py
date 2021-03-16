@@ -27,7 +27,7 @@ def output(output_path, M):
   os.makedirs(output_path, exist_ok=True)
 
   with open(output_path + '/info.txt', 'w') as ff:
-    ff.write(str(M.count_nonzero()))
+    ff.write(str(len(M.data)))
     ff.write('\n')
     ff.write(str(M.shape[0]))
     ff.write('\n')
